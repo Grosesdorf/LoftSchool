@@ -1,36 +1,35 @@
 <?php
 
-function calcMegaFunc($intArr)
+function calcMegaFunc()
 {
-    if (is_string($intArr[0]) && count($intArr) > 2) {
-        switch ($intArr[0]) {
+    if (is_string(func_get_arg(0)) && func_num_args() > 2) {    //¬ целом не мешало б добавить проверку на интежер
+        $arr = func_get_args();
+        $num = func_num_args();
+        $result = $arr[1];
+        switch (func_get_arg(0)) {
             case('+'):
-                $result = $intArr[1];
-                for ($i = 2; $i < count($intArr); $i++) {
-                    $result += $intArr[$i];
+                for ($i = 2; $i < $num; $i++) {
+                    $result += $arr[$i];    //¬ целом не мешало б добавить проверку на интежер
                 }
                 echo 'sum ' . $result . '<br />';
                 break;
             case('-'):
-                $result = $intArr[1];
-                for ($i = 2; $i < count($intArr); $i++) {
-                    $result -= $intArr[$i];
+                for ($i = 2; $i < $num; $i++) {
+                    $result -= $arr[$i];    //¬ целом не мешало б добавить проверку на интежер
                 }
                 echo 'diff ' . $result . '<br />';
                 break;
             case('*'):
-                $result = $intArr[1];
-                for ($i = 2; $i < count($intArr); $i++) {
-                    $result = $result * $intArr[$i];
+                for ($i = 2; $i < $num; $i++) {
+                    $result *= $arr[$i];    //¬ целом не мешало б добавить проверку на интежер
                 }
                 echo 'multi ' . $result . '<br />';
                 break;
             case('/'):
-                if ($intArr[1] !== 0) {
-                    $result = $intArr[1];
-                    for ($i = 2; $i < count($intArr); $i++) {
-                        if ($intArr[$i] !== 0) {
-                            $result /= $intArr[$i];
+                if ($arr[1] !== 0) {    //¬ целом не мешало б добавить проверку на интежер
+                    for ($i = 2; $i < $num; $i++) {
+                        if ($arr[$i] !== 0) {
+                            $result /= $arr[$i];
                         } else {
                             $result = "Error. Can not divide by zero. Rewrite array.";
                             break;
@@ -51,30 +50,14 @@ function calcMegaFunc($intArr)
     }
 }
 
-
-$intArr01 = ['+', 10];
-$intArr02 = ['+', 10, 0, 10];
-$intArr03 = ['-', 15, 0, 10];
-$intArr04 = ['-', 10];
-$intArr05 = ['*', 10, 5, 10];
-$intArr06 = ['*', 10];
-$intArr07 = ['/', 10];
-$intArr08 = ['/', 10, 0, 10];
-$intArr09 = ['/', 0, 10, 10];
-$intArr10 = ['/', 10, 5, 10];
-$intArr11 = [10, 5, 10];
-
-calcMegaFunc($intArr01);
-calcMegaFunc($intArr02);
-calcMegaFunc($intArr03);
-calcMegaFunc($intArr04);
-calcMegaFunc($intArr05);
-calcMegaFunc($intArr06);
-calcMegaFunc($intArr07);
-calcMegaFunc($intArr08);
-calcMegaFunc($intArr09);
-calcMegaFunc($intArr10);
-calcMegaFunc($intArr11);
+calcMegaFunc('+', 5, 3);
+calcMegaFunc('-', 5, 3);
+calcMegaFunc('*', 5, 3);
+calcMegaFunc('/', 5, 3);
+calcMegaFunc('/', 5, 0);
+calcMegaFunc('/', 0, 3);
+calcMegaFunc('hello', 5, 3);
+calcMegaFunc(2, 5, 3);
 
 
 
