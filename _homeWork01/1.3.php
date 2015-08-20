@@ -2,31 +2,31 @@
 
 function calcMegaFunc()
 {
-    if (is_string(func_get_arg(0)) && func_num_args() > 2) {    //¬ целом не мешало б добавить проверку на интежер
+    if (is_string(func_get_arg(0)) && func_num_args() > 2) {
         $arr = func_get_args();
         $num = func_num_args();
         $result = $arr[1];
         switch (func_get_arg(0)) {
             case('+'):
                 for ($i = 2; $i < $num; $i++) {
-                    $result += $arr[$i];    //¬ целом не мешало б добавить проверку на интежер
+                    $result += $arr[$i];
                 }
                 echo 'sum ' . $result . '<br />';
                 break;
             case('-'):
                 for ($i = 2; $i < $num; $i++) {
-                    $result -= $arr[$i];    //¬ целом не мешало б добавить проверку на интежер
+                    $result -= $arr[$i];
                 }
                 echo 'diff ' . $result . '<br />';
                 break;
             case('*'):
                 for ($i = 2; $i < $num; $i++) {
-                    $result *= $arr[$i];    //¬ целом не мешало б добавить проверку на интежер
+                    $result *= $arr[$i];
                 }
                 echo 'multi ' . $result . '<br />';
                 break;
             case('/'):
-                if ($arr[1] !== 0) {    //¬ целом не мешало б добавить проверку на интежер
+                if ($arr[1] !== 0) {    
                     for ($i = 2; $i < $num; $i++) {
                         if ($arr[$i] !== 0) {
                             $result /= $arr[$i];
