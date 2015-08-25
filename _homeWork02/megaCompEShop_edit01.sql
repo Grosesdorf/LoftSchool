@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50541
 File Encoding         : 65001
 
-Date: 2015-08-20 14:51:37
+Date: 2015-08-25 15:41:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -24,7 +24,7 @@ CREATE TABLE `Categories` (
   `title_group` varchar(255) NOT NULL,
   `title_product` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of Categories
@@ -43,9 +43,12 @@ INSERT INTO `Categories` VALUES ('11', 'Контроллеры', 'Контрол
 INSERT INTO `Categories` VALUES ('12', 'Видеокарты', 'Видеокарта');
 INSERT INTO `Categories` VALUES ('13', 'Вэбкамеры', 'Вэбкамера');
 INSERT INTO `Categories` VALUES ('14', 'Аккустические системы', 'Аккустическая система');
+INSERT INTO `Categories` VALUES ('15', 'Корпуса', 'Корпус');
+INSERT INTO `Categories` VALUES ('16', 'Блоки питания', 'Блок питания');
+INSERT INTO `Categories` VALUES ('17', 'Мониторы', 'Монитор');
+INSERT INTO `Categories` VALUES ('18', 'Мыши', 'Мышь');
 INSERT INTO `Categories` VALUES ('19', 'Клавиатуры', 'Клавиатура');
 INSERT INTO `Categories` VALUES ('20', 'Програмное обеспечение ', 'Програмное обеспечение ');
-INSERT INTO `Categories` VALUES ('21', 'Мыши', 'Мышь');
 
 -- ----------------------------
 -- Table structure for Descriptions
@@ -55,7 +58,8 @@ CREATE TABLE `Descriptions` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `description` varchar(255) DEFAULT NULL,
   `path_img01` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  CONSTRAINT `descriptions_ibfk_1` FOREIGN KEY (`id`) REFERENCES `Products` (`id_description`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -153,7 +157,9 @@ CREATE TABLE `Orders` (
   `status` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `last_update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `reg_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `id_user` (`id_user`),
+  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -190,39 +196,46 @@ INSERT INTO `Orders` VALUES ('25', '4', '3', '2015-08-20 14:27:07', '2015-08-20 
 -- ----------------------------
 DROP TABLE IF EXISTS `PartOrder`;
 CREATE TABLE `PartOrder` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `id_order` int(11) unsigned NOT NULL,
   `id_product` int(11) unsigned NOT NULL,
-  `count` int(11) unsigned NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `count` int(11) unsigned NOT NULL,
+  `price` decimal(10,2) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_product` (`id_product`),
+  KEY `id_order` (`id_order`),
+  CONSTRAINT `partorder_ibfk_1` FOREIGN KEY (`id_order`) REFERENCES `Orders` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `partorder_ibfk_2` FOREIGN KEY (`id_product`) REFERENCES `Products` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of PartOrder
 -- ----------------------------
-INSERT INTO `PartOrder` VALUES ('1', '1', '1');
-INSERT INTO `PartOrder` VALUES ('1', '7', '1');
-INSERT INTO `PartOrder` VALUES ('1', '13', '2');
-INSERT INTO `PartOrder` VALUES ('1', '27', '2');
-INSERT INTO `PartOrder` VALUES ('1', '48', '1');
-INSERT INTO `PartOrder` VALUES ('2', '75', '1');
-INSERT INTO `PartOrder` VALUES ('2', '67', '1');
-INSERT INTO `PartOrder` VALUES ('3', '39', '2');
-INSERT INTO `PartOrder` VALUES ('4', '9', '1');
-INSERT INTO `PartOrder` VALUES ('4', '14', '2');
-INSERT INTO `PartOrder` VALUES ('5', '31', '1');
-INSERT INTO `PartOrder` VALUES ('6', '78', '1');
-INSERT INTO `PartOrder` VALUES ('6', '79', '1');
-INSERT INTO `PartOrder` VALUES ('7', '12', '1');
-INSERT INTO `PartOrder` VALUES ('7', '6', '1');
-INSERT INTO `PartOrder` VALUES ('7', '16', '4');
-INSERT INTO `PartOrder` VALUES ('7', '27', '2');
-INSERT INTO `PartOrder` VALUES ('7', '38', '1');
-INSERT INTO `PartOrder` VALUES ('7', '48', '1');
-INSERT INTO `PartOrder` VALUES ('7', '69', '1');
-INSERT INTO `PartOrder` VALUES ('7', '68', '1');
-INSERT INTO `PartOrder` VALUES ('8', '81', '1');
-INSERT INTO `PartOrder` VALUES ('9', '29', '1');
-INSERT INTO `PartOrder` VALUES ('9', '31', '1');
-INSERT INTO `PartOrder` VALUES ('10', '26', '1');
+INSERT INTO `PartOrder` VALUES ('1', '1', '1', '1', '325.56');
+INSERT INTO `PartOrder` VALUES ('2', '1', '7', '1', '325.56');
+INSERT INTO `PartOrder` VALUES ('3', '1', '13', '2', '325.56');
+INSERT INTO `PartOrder` VALUES ('4', '1', '27', '2', '325.56');
+INSERT INTO `PartOrder` VALUES ('5', '1', '48', '1', '325.56');
+INSERT INTO `PartOrder` VALUES ('6', '2', '75', '1', '325.56');
+INSERT INTO `PartOrder` VALUES ('7', '2', '67', '1', '325.56');
+INSERT INTO `PartOrder` VALUES ('8', '3', '39', '2', '325.56');
+INSERT INTO `PartOrder` VALUES ('9', '4', '9', '1', '325.56');
+INSERT INTO `PartOrder` VALUES ('10', '4', '14', '2', '325.56');
+INSERT INTO `PartOrder` VALUES ('11', '5', '31', '1', '325.56');
+INSERT INTO `PartOrder` VALUES ('12', '6', '78', '1', '325.56');
+INSERT INTO `PartOrder` VALUES ('13', '6', '79', '1', '325.56');
+INSERT INTO `PartOrder` VALUES ('14', '7', '12', '1', '325.56');
+INSERT INTO `PartOrder` VALUES ('15', '7', '6', '1', '325.56');
+INSERT INTO `PartOrder` VALUES ('16', '7', '16', '4', '325.56');
+INSERT INTO `PartOrder` VALUES ('17', '7', '27', '2', '325.56');
+INSERT INTO `PartOrder` VALUES ('18', '7', '38', '1', '325.56');
+INSERT INTO `PartOrder` VALUES ('19', '7', '48', '1', '325.56');
+INSERT INTO `PartOrder` VALUES ('20', '7', '69', '1', '325.56');
+INSERT INTO `PartOrder` VALUES ('21', '7', '68', '1', '325.56');
+INSERT INTO `PartOrder` VALUES ('22', '8', '81', '1', '325.56');
+INSERT INTO `PartOrder` VALUES ('23', '9', '29', '1', '325.56');
+INSERT INTO `PartOrder` VALUES ('24', '9', '31', '1', '325.56');
+INSERT INTO `PartOrder` VALUES ('25', '10', '26', '1', '325.56');
 
 -- ----------------------------
 -- Table structure for Products
@@ -231,13 +244,16 @@ DROP TABLE IF EXISTS `Products`;
 CREATE TABLE `Products` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title_model` varchar(255) NOT NULL,
-  `price` decimal(10,2) unsigned DEFAULT NULL,
-  `count` decimal(10,2) DEFAULT NULL,
+  `price` decimal(10,2) unsigned NOT NULL DEFAULT '0.00',
+  `count` decimal(10,2) NOT NULL DEFAULT '0.00',
   `id_categorie` int(11) unsigned NOT NULL,
   `id_vendor` int(11) unsigned NOT NULL,
   `id_description` int(11) unsigned NOT NULL,
   `guarantee` int(11) unsigned DEFAULT '0',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `id_description` (`id_description`),
+  KEY `id_vendor` (`id_vendor`),
+  KEY `id_categorie` (`id_categorie`)
 ) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -311,16 +327,16 @@ INSERT INTO `Products` VALUES ('65', 'DLK-8021P ', '166.40', '2.00', '19', '20',
 INSERT INTO `Products` VALUES ('66', 'DLK-8021U ', '180.70', '2.00', '19', '20', '66', null);
 INSERT INTO `Products` VALUES ('67', 'KB-307F Blue', '442.00', '12.00', '19', '21', '67', null);
 INSERT INTO `Products` VALUES ('68', 'KB-307F White', '468.00', '12.00', '19', '21', '68', null);
-INSERT INTO `Products` VALUES ('69', 'G-CUBE GOT-60B (Berry-Tini) ', '260.00', '12.00', '21', '12', '69', null);
-INSERT INTO `Products` VALUES ('70', 'K4-59MD-2 Grey', '195.00', '12.00', '21', '12', '70', null);
-INSERT INTO `Products` VALUES ('71', 'HQ-M1', '65.00', '12.00', '21', '21', '71', null);
-INSERT INTO `Products` VALUES ('72', 'HQ-GMW703 Black', '273.00', '12.00', '21', '21', '72', null);
-INSERT INTO `Products` VALUES ('73', 'V710 Aresze', '266.50', '12.00', '21', '14', '73', null);
-INSERT INTO `Products` VALUES ('74', 'V720 Aresze', '257.92', '12.00', '21', '14', '74', null);
-INSERT INTO `Products` VALUES ('75', 'ERGO 7000 Black (31030052103)', '377.00', '12.00', '21', '22', '75', null);
-INSERT INTO `Products` VALUES ('76', 'Navigator 380 Green (31011339100)', '767.00', '12.00', '21', '22', '76', null);
-INSERT INTO `Products` VALUES ('77', 'M105 Blue Optical (910-003105)', '273.00', '3.00', '21', '23', '77', null);
-INSERT INTO `Products` VALUES ('78', 'M105 Black Optical (910-002940) ', '273.00', '3.00', '21', '23', '78', null);
+INSERT INTO `Products` VALUES ('69', 'G-CUBE GOT-60B (Berry-Tini) ', '260.00', '12.00', '18', '12', '69', null);
+INSERT INTO `Products` VALUES ('70', 'K4-59MD-2 Grey', '195.00', '12.00', '18', '12', '70', null);
+INSERT INTO `Products` VALUES ('71', 'HQ-M1', '65.00', '12.00', '18', '21', '71', null);
+INSERT INTO `Products` VALUES ('72', 'HQ-GMW703 Black', '273.00', '12.00', '18', '21', '72', null);
+INSERT INTO `Products` VALUES ('73', 'V710 Aresze', '266.50', '12.00', '18', '14', '73', null);
+INSERT INTO `Products` VALUES ('74', 'V720 Aresze', '257.92', '12.00', '18', '14', '74', null);
+INSERT INTO `Products` VALUES ('75', 'ERGO 7000 Black (31030052103)', '377.00', '12.00', '18', '22', '75', null);
+INSERT INTO `Products` VALUES ('76', 'Navigator 380 Green (31011339100)', '767.00', '12.00', '18', '22', '76', null);
+INSERT INTO `Products` VALUES ('77', 'M105 Blue Optical (910-003105)', '273.00', '3.00', '18', '23', '77', null);
+INSERT INTO `Products` VALUES ('78', 'M105 Black Optical (910-002940) ', '273.00', '3.00', '18', '23', '78', null);
 INSERT INTO `Products` VALUES ('79', 'Windows 8.1', '4108.00', '3.00', '20', '24', '79', null);
 INSERT INTO `Products` VALUES ('80', '2015 Desktop BOX', '754.00', '3.00', '20', '25', '80', null);
 INSERT INTO `Products` VALUES ('81', '2015 Desktop Renewal', '520.00', '3.00', '20', '25', '81', null);
@@ -387,7 +403,8 @@ DROP TABLE IF EXISTS `Vendors`;
 CREATE TABLE `Vendors` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `title_vendor` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  CONSTRAINT `vendors_ibfk_1` FOREIGN KEY (`id`) REFERENCES `Products` (`id_vendor`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------

@@ -26,7 +26,7 @@ function calcMegaFunc()
                 echo 'multi ' . $result . '<br />';
                 break;
             case('/'):
-                if ($arr[1] !== 0) {    
+                if ($arr[1] !== 0) {
                     for ($i = 2; $i < $num; $i++) {
                         if ($arr[$i] !== 0) {
                             $result /= $arr[$i];

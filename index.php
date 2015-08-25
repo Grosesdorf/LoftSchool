@@ -1,36 +1,41 @@
 <?php
 
-$DOCUMENT_ROOT = $_SERVER["DOCUMENT_ROOT"];
+$n = 5;
+$m = 4;
 
-$date = date('H:i, jS F Y');
-$order = 123652;
-$quantity = 12;
-$cost = 12.35;
-$total = $quantity * $cost;
+$arr = [[$n],[$m]];
+$i = 0;
+$k = 0;
+$p = 1;
 
-$str = $date . "\t" . $order . "\t" . $quantity . "\t" . $cost . "\t" . $total . PHP_EOL;
+while($i < $n*$m){   //Цикл по номеру витка
+    $k++;
+    for($j=$k-1;$j<$m-$k+1;$j++){
+        $arr[$k-1][$j]=$p++;
+        $i++;
+    }   /*Определение значений верхнего гор столбца*/
 
-$fh = fopen("$DOCUMENT_ROOT/tmp/x-data.txt",'ab') or die("can't open file");
+    for($j=$k;$j<$n-$k+1;$j++){
+        $arr[$j][$m-$k]=$p++;
+        $i++;
+    }   /* --//-- По правому вертикальному столбцу*/
 
-if (-1 == fwrite($fh, $str)){
-    die("can't write data");
+    for($j=$m-$k-1;$j>=$k-1;$j--){
+        $arr[$n-$k][$j]=$p++;
+        $i++;
+    }   /* --//-- по нижнему горизонтальному столбцу*/
+
+    for($j=$n-$k-1;$j>=$k;$j--){
+        $arr[$j][$k-1]=$p++;
+        $i++;
+    }   /* --//-- по левому вертикальному столбцу*/
+
 }
 
-fclose($fh) or die("can't close file");
+for ($q=0; $q<$n; $q++){
+    for ($w=0; $w<$m; $w++){
+        print_r($arr[$q][$w]);
+    };
 
-$fh = fopen("$DOCUMENT_ROOT/tmp/x-data.txt",'ab') or die("can't open file");
-
-if (!fh){
-    echo "��� �������";
-    exit;
 }
-
-while(!feof($fh)){
-    $order = fgets($fh, 999);
-    echo $order . "<br />";
-}
-
-fclose($fh) or die("can't close file");
-
-
 
