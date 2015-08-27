@@ -1,6 +1,0 @@
-here is another (maybe the easiest) way of doing POST http requests from php using its built-in capabilities. 
-feel free to add the headers you need (notably the Host: header) to further customize the request.
-
-note: this method does not allow file uploads. if you want to upload a file with your request you will need to modify the context parameters to provide multipart/form-data encoding 
-(check out http://www.php.net/manual/en/context.http.php ) and build the $data_url following the guidelines 
-on http://www.w3.org/TR/html401/interact/forms.html#h-17.13.4.2
