@@ -1,7 +1,2 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: support
- * Date: 27.08.2015
- * Time: 16:34
- */
+$dbo = new PDO('mysql:host=localhost;dbname=megaCompEShop','support','qwerty');

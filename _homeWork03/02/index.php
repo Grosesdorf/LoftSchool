@@ -1,4 +1,6 @@
-<?php?>
+<?php
+require "work.php";
+?>
 
 
 <html>
@@ -7,14 +9,19 @@
     <meta charset="utf-8">
 </head>
 <body>
-<form>
+<form action="formatFile.php" method="post">
     <p>Выбрать таблицу:</p>
-    <select>
-        <option>Пункт 1</option>
-        <option>Пункт 2</option>
+    <select name="table">
+        <?php
+            while ($row = $result->fetch(PDO::FETCH_NUM)) {
+                echo '<option>';
+                echo $row[0];
+                echo '</option>';
+            }
+        ?>
     </select>
     <p>Выбрать формат:</p>
-    <select>
+    <select name="format">
         <option>csv</option>
         <option>json</option>
         <option>xml</option>
