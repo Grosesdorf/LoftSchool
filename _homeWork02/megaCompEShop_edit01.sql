@@ -10,45 +10,10 @@ Target Server Type    : MYSQL
 Target Server Version : 50541
 File Encoding         : 65001
 
-Date: 2015-08-25 15:41:11
+Date: 2015-08-27 09:10:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
-
--- ----------------------------
--- Table structure for Categories
--- ----------------------------
-DROP TABLE IF EXISTS `Categories`;
-CREATE TABLE `Categories` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `title_group` varchar(255) NOT NULL,
-  `title_product` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of Categories
--- ----------------------------
-INSERT INTO `Categories` VALUES ('1', 'Материнские платы', 'Материнская плата');
-INSERT INTO `Categories` VALUES ('2', 'Процессоры', 'Процессор');
-INSERT INTO `Categories` VALUES ('3', 'Модули памяти', 'Модуль памяти');
-INSERT INTO `Categories` VALUES ('4', 'Карты памяти', 'Карта памяти');
-INSERT INTO `Categories` VALUES ('5', 'Флеш-память USB', 'Флеш-память USB');
-INSERT INTO `Categories` VALUES ('6', 'Дисководы FDD', 'Дисковод FDD');
-INSERT INTO `Categories` VALUES ('7', 'Накопители SSD', 'Накопитель SSD');
-INSERT INTO `Categories` VALUES ('8', 'Накопители HDD внутренние', 'Накопитель HDD внутренний');
-INSERT INTO `Categories` VALUES ('9', 'Накопители HDD внешние', 'Накопитель HDD внешний');
-INSERT INTO `Categories` VALUES ('10', 'Оптические приводы дисков', 'ОПД');
-INSERT INTO `Categories` VALUES ('11', 'Контроллеры', 'Контроллер');
-INSERT INTO `Categories` VALUES ('12', 'Видеокарты', 'Видеокарта');
-INSERT INTO `Categories` VALUES ('13', 'Вэбкамеры', 'Вэбкамера');
-INSERT INTO `Categories` VALUES ('14', 'Аккустические системы', 'Аккустическая система');
-INSERT INTO `Categories` VALUES ('15', 'Корпуса', 'Корпус');
-INSERT INTO `Categories` VALUES ('16', 'Блоки питания', 'Блок питания');
-INSERT INTO `Categories` VALUES ('17', 'Мониторы', 'Монитор');
-INSERT INTO `Categories` VALUES ('18', 'Мыши', 'Мышь');
-INSERT INTO `Categories` VALUES ('19', 'Клавиатуры', 'Клавиатура');
-INSERT INTO `Categories` VALUES ('20', 'Програмное обеспечение ', 'Програмное обеспечение ');
 
 -- ----------------------------
 -- Table structure for Descriptions
@@ -146,6 +111,41 @@ INSERT INTO `Descriptions` VALUES ('78', 'USB', '');
 INSERT INTO `Descriptions` VALUES ('79', 'Professional 64-bit English (Multilanguage) OEM DVD (FQC-06949)', '');
 INSERT INTO `Descriptions` VALUES ('80', '1 year Base (на 2 компьютера)', '');
 INSERT INTO `Descriptions` VALUES ('81', 'обновление на год на 2 компьютера', '');
+
+-- ----------------------------
+-- Table structure for Groups
+-- ----------------------------
+DROP TABLE IF EXISTS `Groups`;
+CREATE TABLE `Groups` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title_group` varchar(255) DEFAULT NULL,
+  `title_product` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of Groups
+-- ----------------------------
+INSERT INTO `Groups` VALUES ('1', 'Материнские платы', 'Материнская плата');
+INSERT INTO `Groups` VALUES ('2', 'Процессоры', 'Процессор');
+INSERT INTO `Groups` VALUES ('3', 'Модули памяти', 'Модуль памяти');
+INSERT INTO `Groups` VALUES ('4', 'Карты памяти', 'Карта памяти');
+INSERT INTO `Groups` VALUES ('5', 'Флеш-память USB', 'Флеш-память USB');
+INSERT INTO `Groups` VALUES ('6', 'Дисководы FDD', 'Дисковод FDD');
+INSERT INTO `Groups` VALUES ('7', 'Накопители SSD', 'Накопитель SSD');
+INSERT INTO `Groups` VALUES ('8', 'Накопители HDD внутренние', 'Накопитель HDD внутренний');
+INSERT INTO `Groups` VALUES ('9', 'Накопители HDD внешние', 'Накопитель HDD внешний');
+INSERT INTO `Groups` VALUES ('10', 'Оптические приводы дисков', 'ОПД');
+INSERT INTO `Groups` VALUES ('11', 'Контроллеры', 'Контроллер');
+INSERT INTO `Groups` VALUES ('12', 'Видеокарты', 'Видеокарта');
+INSERT INTO `Groups` VALUES ('13', 'Вэбкамеры', 'Вэбкамера');
+INSERT INTO `Groups` VALUES ('14', 'Аккустические системы', 'Аккустическая система');
+INSERT INTO `Groups` VALUES ('15', 'Корпуса', 'Корпус');
+INSERT INTO `Groups` VALUES ('16', 'Блоки питания', 'Блок питания');
+INSERT INTO `Groups` VALUES ('17', 'Мониторы', 'Монитор');
+INSERT INTO `Groups` VALUES ('18', 'Мыши', 'Мышь');
+INSERT INTO `Groups` VALUES ('19', 'Клавиатуры', 'Клавиатура');
+INSERT INTO `Groups` VALUES ('20', 'Програмное обеспечение ', 'Програмное обеспечение ');
 
 -- ----------------------------
 -- Table structure for Orders
@@ -246,14 +246,15 @@ CREATE TABLE `Products` (
   `title_model` varchar(255) NOT NULL,
   `price` decimal(10,2) unsigned NOT NULL DEFAULT '0.00',
   `count` decimal(10,2) NOT NULL DEFAULT '0.00',
-  `id_categorie` int(11) unsigned NOT NULL,
+  `id_group` int(11) unsigned NOT NULL,
   `id_vendor` int(11) unsigned NOT NULL,
   `id_description` int(11) unsigned NOT NULL,
   `guarantee` int(11) unsigned DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `id_description` (`id_description`),
   KEY `id_vendor` (`id_vendor`),
-  KEY `id_categorie` (`id_categorie`)
+  KEY `id_group` (`id_group`),
+  CONSTRAINT `products_ibfk_1` FOREIGN KEY (`id_group`) REFERENCES `Groups` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
