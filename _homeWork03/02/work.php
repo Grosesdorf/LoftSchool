@@ -1,5 +1,5 @@
 <?php
-require "db_connect.php";
+require "dbConnect.php";
 
 $result = $dbo->query("SHOW TABLES");
 

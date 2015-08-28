@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=utf8');
 //
 //$n = 5;
 //$m = 4;
