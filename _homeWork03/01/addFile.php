@@ -17,7 +17,7 @@ elseif($_REQUEST['save'] === 'Save') {
             $str = 'The file is record.';
         }
     else {
-            $str = 'File is not recor';
+            $str = 'File is not record.';
         }
 
 }

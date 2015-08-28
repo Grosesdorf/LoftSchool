@@ -1,15 +1,13 @@
 <?php
-require "work.php";
+require "dbWork.php";
 ?>
-
-
 <html>
 <head>
     <title>Работа с БД</title>
     <meta charset="utf-8">
 </head>
 <body>
-<form action="formatFile.php" method="post">
+<form action="dbWork.php" method="post">
     <p>Выбрать таблицу:</p>
     <select name="table">
         <?php

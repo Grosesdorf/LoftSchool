@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<catalog>
+    <categorie id="1">
+        <title>Mobile</title>
+        <products>
+            <product>
+                <id>1</id>
+                <title>Samsung01</title>
+                <count>3</count>
+                <price>234</price>
+            </product>
+            <product>
+                <id>2</id>
+                <title>Samsung02</title>
+                <count>5</count>
+                <price>300</price>
+            </product>
+            <product>
+                <id>3</id>
+                <title>Samsung03</title>
+                <count>38</count>
+                <price>150</price>
+            </product>
+        </products>
+    </categorie>
+    <categorie id="2">
+        <title>Computer</title>
+        <products>
+            <product>
+                <id>1</id>
+                <title>Pentium</title>
+                <count>3</count>
+                <price>234</price>
+            </product>
+            <product>
+                <id>2</id>
+                <title>Pentium-M</title>
+                <count>5</count>
+                <price>300</price>
+            </product>
+            <product>
+                <id>3</id>
+                <title>Celeron-D</title>
+                <count>38</count>
+                <price>150</price>
+            </product>
+        </products>
+    </categorie>
+</catalog>
