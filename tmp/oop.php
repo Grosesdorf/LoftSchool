@@ -1,7 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: support
- * Date: 28.08.2015
- * Time: 19:20
- */
+
+class Car
+{
+
+    public $color = 'red';
+    public $engine = 'disel';
+    private $doors = 4;
+    protected $Wheels = 4;
+
+    public function displayWheel()
+    {
+        echo 'Кол-во дверей: ' . $this->doors;
+    }
+}
