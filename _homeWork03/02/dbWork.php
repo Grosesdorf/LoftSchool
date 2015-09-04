@@ -1,4 +1,5 @@
 <?php
+
 require "dbConnect.php";
 require "personalFunctions.php";
 
@@ -12,18 +13,26 @@ if(isset($_POST['table']) && isset($_POST['format'])){
     switch($_POST['format']){
         case('csv'):
             writeCsv($rows);
+            $fileName = 'file.csv';
             break;
         case('json'):
             writeJson($rows);
+            $fileName = 'file.json';
             break;
         case('xml'):
             writeXml($rows);
+            $fileName = 'file.xml';
             break;
     }
+
+    saveFileFormat($fileName);
+
 }
 else{
     $result = $dbo->query('SHOW TABLES');
     unset($dbo);
 }
+
+
 
 

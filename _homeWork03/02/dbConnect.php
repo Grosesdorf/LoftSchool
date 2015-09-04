@@ -1,10 +1,10 @@
 <?php
 try {
-    $dbo = new PDO('mysql:host=localhost;dbname=megaCompEShop', 'support', 'qwerty');
+    $dbo = new PDO("mysql:host=localhost;dbname=megaCompEShop", "support", "qwerty");
     $dbo->query('SET NAMES "UTF-8"');
 }
 catch (PDOException $e){
-    echo "Âîçíèêëà îøèáêà: " . $e->getMessage();
+    echo "Ğ’Ğ¾Ğ·Ğ½Ğ¸ĞºĞ»Ğ° Ğ¾ÑˆĞ¸Ğ±ĞºĞ°: " . $e->getMessage();
     exit;
 }
 
